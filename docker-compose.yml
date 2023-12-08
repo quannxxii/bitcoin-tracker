@@ -1,0 +1,18 @@
+version: '3'
+services:
+  frontend:
+    build: .
+    ports:
+      - 27017:27017
+    depends_on:
+      - backend
+  backend:
+    build:
+      context: ./server
+    ports:
+      - 27017:27017
+    environment:
+      - PORT=27017
+    volumes:
+      - ./server:/app
+    command: npm run start
